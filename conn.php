@@ -1,9 +1,28 @@
 <?php
-$dbHost = getenv('MYSQL_HOST') ?: 'localhost';
-$dbUser = getenv('MYSQL_USER') ?: 'root';
+mysqli_report(MYSQLI_REPORT_OFF);
+
+$dbHost = getenv('MYSQL_HOST') ?: '';
+$dbUser = getenv('MYSQL_USER') ?: '';
 $dbPassword = getenv('MYSQL_PASSWORD') ?: '';
 $dbName = getenv('MYSQL_DATABASE') ?: 'bakery_shop_db';
 $dbPort = (int) (getenv('MYSQL_PORT') ?: 3306);
+
+$databaseUrl = getenv('MYSQL_URL');
+if ($databaseUrl) {
+	$database = parse_url($databaseUrl);
+	if ($database !== false && isset($database['host'])) {
+		$dbHost = $database['host'];
+		$dbUser = isset($database['user']) ? urldecode($database['user']) : $dbUser;
+		$dbPassword = isset($database['pass']) ? urldecode($database['pass']) : $dbPassword;
+		$dbName = isset($database['path']) ? ltrim($database['path'], '/') : $dbName;
+		$dbPort = isset($database['port']) ? (int) $database['port'] : $dbPort;
+	}
+}
+
+if ($dbHost === '' || $dbUser === '') {
+	header('HTTP/1.1 503 Service Unavailable');
+	exit('Database is not configured. Set MYSQL_URL or the MYSQL_HOST, MYSQL_USER, and MYSQL_PASSWORD environment variables.');
+}
 
 $con = mysqli_connect($dbHost, $dbUser, $dbPassword, $dbName, $dbPort);
 

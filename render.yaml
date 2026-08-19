@@ -5,6 +5,8 @@ services:
     plan: free
     healthCheckPath: /index.php
     envVars:
+      - key: MYSQL_URL
+        sync: false
       - key: MYSQL_HOST
         sync: false
       - key: MYSQL_PORT
