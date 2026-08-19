@@ -7,7 +7,7 @@ $dbPassword = getenv('MYSQL_PASSWORD') ?: '';
 $dbName = getenv('MYSQL_DATABASE') ?: 'bakery_shop_db';
 $dbPort = (int) (getenv('MYSQL_PORT') ?: 3306);
 
-$databaseUrl = getenv('MYSQL_URL');
+$databaseUrl = getenv('MYSQL_URL') ?: getenv('DATABASE_URL');
 if ($databaseUrl) {
 	$database = parse_url($databaseUrl);
 	if ($database !== false && isset($database['host'])) {
