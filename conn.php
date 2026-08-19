@@ -1,11 +1,11 @@
 <?php
 mysqli_report(MYSQLI_REPORT_OFF);
 
-$dbHost = getenv('MYSQL_HOST') ?: '';
-$dbUser = getenv('MYSQL_USER') ?: '';
-$dbPassword = getenv('MYSQL_PASSWORD') ?: '';
-$dbName = getenv('MYSQL_DATABASE') ?: 'bakery_shop_db';
-$dbPort = (int) (getenv('MYSQL_PORT') ?: 3306);
+$dbHost = getenv('MYSQL_HOST') ?: getenv('MYSQLHOST') ?: getenv('RAILWAY_TCP_PROXY_DOMAIN') ?: '';
+$dbUser = getenv('MYSQL_USER') ?: getenv('MYSQLUSER') ?: '';
+$dbPassword = getenv('MYSQL_PASSWORD') ?: getenv('MYSQLPASSWORD') ?: '';
+$dbName = getenv('MYSQL_DATABASE') ?: getenv('MYSQLDATABASE') ?: 'bakery_shop_db';
+$dbPort = (int) (getenv('MYSQL_PORT') ?: getenv('MYSQLPORT') ?: getenv('RAILWAY_TCP_PROXY_PORT') ?: 3306);
 
 $databaseUrl = getenv('MYSQL_URL') ?: getenv('DATABASE_URL');
 if ($databaseUrl) {
