@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: bakery-shop
+    runtime: docker
+    plan: free
+    healthCheckPath: /index.php
+    envVars:
+      - key: MYSQL_HOST
+        sync: false
+      - key: MYSQL_PORT
+        value: "3306"
+      - key: MYSQL_DATABASE
+        value: bakery_shop_db
+      - key: MYSQL_USER
+        sync: false
+      - key: MYSQL_PASSWORD
+        sync: false
