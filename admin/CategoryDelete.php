@@ -1,0 +1,27 @@
+<?php 
+session_start();
+if(isset($_SESSION["ad_session"]))
+{
+
+include("header.php");
+		include("../conn.php");
+		 
+		 mysqli_query($con,"delete from category where cat_id=".$_REQUEST["id"]);
+	
+	echo "<script>window.location='CategoryView.php';</script>";
+}
+	else	 
+
+	echo "<script>window.location='Login.php';</script>";
+?>	
+
+	<?php
+
+		include("footer.php");
+		
+?>	 
+		 
+		 
+		 
+		 
+	
